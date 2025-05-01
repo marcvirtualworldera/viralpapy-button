@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Click Me Game</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      overflow: hidden;
+    }
+    #clicky {
+      position: absolute;
+      width: 120px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <img src="popy_transparent.png" id="clicky" onclick="window.location.href='https://www.viralpapy.com/viralpapy'" />
+
+  <script>
+    const el = document.getElementById("clicky");
+    function moveIt() {
+      const x = Math.floor(Math.random() * (window.innerWidth - 120));
+      const y = Math.floor(Math.random() * (window.innerHeight - 120));
+      el.style.left = x + "px";
+      el.style.top = y + "px";
+    }
+    setInterval(moveIt, 1000);
+  </script>
+</body>
+</html>
