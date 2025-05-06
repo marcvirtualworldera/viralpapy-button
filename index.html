@@ -3,59 +3,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Catch Me If You Can</title>
-  <base target="_top"> <!-- Ensures full-page redirect even if embedded in an iframe -->
+  <title>Papy Button Game</title>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      background-color: transparent;
       overflow: hidden;
-      background: transparent;
     }
     #papy {
       position: absolute;
-      width: 80px;
-      height: 80px;
+      width: 120px;
       cursor: pointer;
-      z-index: 9999;
-      pointer-events: auto;
-      transition: left 0.3s ease, top 0.3s ease;
     }
   </style>
 </head>
 <body>
-  <img id="papy" src="popy_transparent.png" alt="Catch Viral Papy!" />
-
+  <img id="papy" src="popy_transparent.png" onclick="document.body.innerHTML=''; window.top.location.href='https://viralpapy.com/viralpapy'" />
   <script>
     const papy = document.getElementById("papy");
-    const targetURL = "https://viralpapy.com/viralpapy";
 
     function movePapy() {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 100);
+      const maxX = window.innerWidth - papy.offsetWidth;
+      const maxY = window.innerHeight - papy.offsetHeight;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
       papy.style.left = `${x}px`;
       papy.style.top = `${y}px`;
     }
 
-    // Add a small cooldown to prevent instant hover escape
-    let lastMove = 0;
-    papy.addEventListener("mouseover", () => {
-      const now = Date.now();
-      if (now - lastMove > 500) {
-        movePapy();
-        lastMove = now;
-      }
-    });
-
-    // Full page redirect on click
-    papy.addEventListener("click", () => {
-      window.top.location.href = targetURL;
-    });
-
-    // Initial position and automatic gentle movement
-    movePapy();
-    setInterval(movePapy, 5000);
+    setInterval(movePapy, 1000); // Move every 1 second
   </script>
 </body>
 </html>
+
 
