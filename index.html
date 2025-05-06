@@ -10,14 +10,16 @@
     body {
       margin: 0;
       overflow: hidden;
-      background: #111;
+      background: transparent;
     }
     #papy {
       position: absolute;
       width: 80px;
       height: 80px;
       cursor: pointer;
-      transition: transform 0.2s;
+      z-index: 9999;
+      pointer-events: auto;
+      transition: left 0.3s ease, top 0.3s ease;
     }
   </style>
 </head>
@@ -35,20 +37,25 @@
       papy.style.top = `${y}px`;
     }
 
-    papy.addEventListener("mouseover", movePapy);
+    // Add a small cooldown to prevent instant hover escape
+    let lastMove = 0;
+    papy.addEventListener("mouseover", () => {
+      const now = Date.now();
+      if (now - lastMove > 500) {
+        movePapy();
+        lastMove = now;
+      }
+    });
 
+    // Full page redirect on click
     papy.addEventListener("click", () => {
       window.top.location.href = targetURL;
     });
 
-    movePapy(); // Initial position
-    setInterval(movePapy, 3000); // Moves every few seconds
+    // Initial position and automatic gentle movement
+    movePapy();
+    setInterval(movePapy, 5000);
   </script>
 </body>
 </html>
 
-
-    setInterval(movePapy, 1000); // Move every 1 second
-  </script>
-</body>
-</html>
