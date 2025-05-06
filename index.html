@@ -3,35 +3,50 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Papy Button Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catch Me If You Can</title>
+  <base target="_top"> <!-- Ensures full-page redirect even if embedded in an iframe -->
   <style>
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
-      background-color: transparent;
       overflow: hidden;
+      background: #111;
     }
     #papy {
       position: absolute;
-      width: 120px;
+      width: 80px;
+      height: 80px;
       cursor: pointer;
+      transition: transform 0.2s;
     }
   </style>
 </head>
 <body>
-  <img id="papy" src="popy_transparent.png" onclick="window.location.href='https://viralpapy.com/viralpapy'" />
+  <img id="papy" src="popy_transparent.png" alt="Catch Viral Papy!" />
 
   <script>
     const papy = document.getElementById("papy");
+    const targetURL = "https://viralpapy.com/viralpapy";
 
     function movePapy() {
-      const maxX = window.innerWidth - papy.offsetWidth;
-      const maxY = window.innerHeight - papy.offsetHeight;
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
       papy.style.left = `${x}px`;
       papy.style.top = `${y}px`;
     }
+
+    papy.addEventListener("mouseover", movePapy);
+
+    papy.addEventListener("click", () => {
+      window.location.href = targetURL;
+    });
+
+    movePapy(); // Initial position
+    setInterval(movePapy, 3000); // Moves every few seconds
+  </script>
+</body>
+</html>
+
 
     setInterval(movePapy, 1000); // Move every 1 second
   </script>
